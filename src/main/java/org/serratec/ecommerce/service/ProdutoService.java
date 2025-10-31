@@ -77,6 +77,12 @@ public class ProdutoService {
         return new ProdutoResponseDTO(produto);
     }
 
-
+    public void deletar(Long id) {
+        Optional<Produto> optionalProduto = produtoRepository.findById(id);
+        if (!optionalProduto.isPresent()) {
+            throw new ProdutoNaoEncontradoException("O produto informado não existe!");
+        }
+        produtoRepository.deleteById(id);
+    }
 
 }
