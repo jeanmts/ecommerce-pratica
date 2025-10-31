@@ -21,7 +21,6 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    private CategoriaService categoriaService;
 
     @GetMapping
     public ResponseEntity<List<ProdutoDTO>> listarTodos(){
