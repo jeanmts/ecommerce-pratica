@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoResponseDTO {
-
+    private Long id;
     private String nome;
 
     private String descricao;
@@ -27,12 +27,21 @@ public class ProdutoResponseDTO {
     }
 
     public ProdutoResponseDTO(Produto produto) {
+        this.id = produto.getId();
         this.nome = produto.getNome();
         this.descricao = produto.getDescricao();
         this.valor = produto.getValor();
         this.estoque = produto.getEstoque();
         this.categoria = produto.getCategoria();
         this.pedidos = produto.getPedidos();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
