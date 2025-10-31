@@ -86,19 +86,5 @@ public class ProdutoPedido {
         this.id = id;
     }
 
-public Double calcularPedido(List<Produto> produtos, Double desconto) {
 
-        Double valor = 0.0;
-
-        if (desconto.equals(0)) {
-            for (int i = 0; i < produtos.size(); i++) {
-              valor += produtos.get(i).getValor();
-            }
-            return valor;
-        }
-        for (int i = 0; i < produtos.size(); i++) {
-            valor += produtos.get(i).getValor() ;
-        }
-        return valor *  ( valor - (desconto / 100));
-    }
 }

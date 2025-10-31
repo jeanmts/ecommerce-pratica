@@ -38,15 +38,24 @@ public class Pedido {
     @JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name = "id_pedido"), inverseJoinColumns = @JoinColumn( name = "id_produto"))
     private List<Produto> produtos;
 
+    private Double desconto;
+
+    private Double valor;
+
+    private Double valorTotal;
+
     public Pedido() {
     }
 
-    public Pedido(Long id, Cliente cliente, StatusPedido statusPedido, LocalDateTime dataHoraPedido, List<Produto> produtos) {
+    public Pedido(Long id, Cliente cliente, StatusPedido statusPedido, LocalDateTime dataHoraPedido, List<Produto> produtos, Double desconto, Double valor, Double valorTotal) {
         this.id = id;
         this.cliente = cliente;
         this.statusPedido = statusPedido;
         this.dataHoraPedido = dataHoraPedido;
         this.produtos = produtos;
+        this.desconto = desconto;
+        this.valor = valor;
+        this.valorTotal = valorTotal;
     }
 
     public Long getId() {
@@ -88,4 +97,30 @@ public class Pedido {
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
+
+    public Double getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(Double desconto) {
+        this.desconto = desconto;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Double calcularPedido() {}
 }

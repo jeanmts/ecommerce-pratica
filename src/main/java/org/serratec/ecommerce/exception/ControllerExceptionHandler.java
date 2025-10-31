@@ -68,4 +68,9 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleProdutoDuplicadoException(ProdutoDuplicadoException ex) {
         return ResponseEntity.unprocessableEntity().body(ex.getMessage());
     }
+
+    @ExceptionHandler(PedidoNaoEncontradoException.class)
+    protected ResponseEntity<Object> handlePedidoNaoEncontradoException(PedidoNaoEncontradoException ex) {
+        return ResponseEntity.unprocessableEntity().body(ex.getMessage());
+    }
 }

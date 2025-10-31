@@ -1,12 +1,16 @@
 package org.serratec.ecommerce.service;
 
+import org.serratec.ecommerce.dto.CategoriaResponseDTO;
 import org.serratec.ecommerce.dto.ProdutoDTO;
 
 import org.serratec.ecommerce.dto.ProdutoRequestDTO;
 import org.serratec.ecommerce.dto.ProdutoResponseDTO;
+import org.serratec.ecommerce.entity.Categoria;
 import org.serratec.ecommerce.entity.Produto;
+import org.serratec.ecommerce.exception.CategoriaNaoEncontradaException;
 import org.serratec.ecommerce.exception.ProdutoDuplicadoException;
 import org.serratec.ecommerce.exception.ProdutoNaoEncontradoException;
+import org.serratec.ecommerce.repository.CategoriaRepository;
 import org.serratec.ecommerce.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,9 @@ public class ProdutoService {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     public List<ProdutoDTO> listarProduto() {
         List<Produto> produtos = produtoRepository.findAll();
@@ -45,9 +52,14 @@ public class ProdutoService {
     public ProdutoResponseDTO inserirProduto(ProdutoRequestDTO produtoRequestDTO) {
         Optional<Produto> optionalProduto = produtoRepository.findByNome(produtoRequestDTO.getNome());
 
+        if (!categoriaRepository.existsById(produtoRequestDTO.getCategoria().getId())){
+            throw new CategoriaNaoEncontradaException("A categoria informada para este produto não existe!");
+        }
+
         if (optionalProduto.isPresent()) {
             throw new ProdutoDuplicadoException("O produto informado já esta cadastrado!");
         }
+
         Produto produto = new Produto();
         produto.setNome(produtoRequestDTO.getNome());
         produto.setDescricao(produtoRequestDTO.getDescricao());
